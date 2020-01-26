@@ -1,0 +1,16 @@
+Generate a random password
+    Decide the criteria
+        what is the length of the password?
+            we will use a prompt to figure out the password.
+        what characters do we use?
+            we need uppercase characters
+                we will use a confirm if user wants uppercase characters
+            we need lowercase chacacters
+                we will use a confirm if user wants lowercase characters
+            we need numbers
+                we will use a confirm if user wants numbers
+            we need special characters
+                we will use a confirm if user wants special characters
+
+* Break down the process.
+    
