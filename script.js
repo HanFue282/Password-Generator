@@ -12,18 +12,26 @@ var password = document.getElementById("password");
 document.getElementById("generate").onclick = function(){writePassword()};
 
 // Write password to the #password input
-  function writePassword(){
-    var confirmCharNum = prompt("How many characters do you want your password?" , "5-15");
+  function writePassword(length){
+    
+    var confirmLength = prompt("How many characters do you want your password?");
 
-    if (confirmCharNum) {
-      alert( confirmCharNum + " characters will be in your password");
+    if (confirmLength < 4) {
+      alert("Password must be between 5-15 characters.")
+      return confirmLength;
+    }
+
+    if (confirmLength) {
+      alert(confirmLength + " characters will be in your password");
     }
     else{
       prompt("Please enter the number of characters for your password.");
+      
     }
-
-  var confirmLowerChar = confirm("Would you like lower case characters in your password?");
-
+    
+  
+  
+      var confirmLowerChar = confirm("Would you like lower case characters in your password?");
       if (confirmLowerChar) {
         alert("Lower case characters are added into password.");
         //Added!
@@ -32,9 +40,9 @@ document.getElementById("generate").onclick = function(){writePassword()};
         alert("Lower case characters will not be added into password");
         //Not added.
       }
+  
 
-  var confirmUpperChar = confirm("Would you like upper case characters in your password?");
-
+      var confirmUpperChar = confirm("Would you like upper case characters in your password?");
       if(confirmUpperChar) {
         alert("Upper case characters are added into password.");
         //Added!
@@ -43,9 +51,9 @@ document.getElementById("generate").onclick = function(){writePassword()};
         alert("Upper case characters will not be added into password.");
         //Not added.
       }
+      
   
-  var confirmNumberChar = confirm("Would you like numbers in your password?");
-
+      var confirmNumberChar = confirm("Would you like numbers in your password?");
       if(confirmNumberChar) {
       alert("Numbers will be added into password.");
         //Added!
@@ -55,8 +63,8 @@ document.getElementById("generate").onclick = function(){writePassword()};
         //Not added.
       }
   
-  var confirmSpecialChar = confirm("Would you like special charaters in your password?");
-
+  
+      var confirmSpecialChar = confirm("Would you like special charaters in your password?");
       if(confirmSpecialChar) {
       alert("Special characters are added into password.");
         //Added!
@@ -66,7 +74,12 @@ document.getElementById("generate").onclick = function(){writePassword()};
         //Not added.
       }
 
-      return writePassword;
+      return (confirmLength + confirmLowerChar + confirmUpperChar + confirmNumberChar +confirmSpecialChar);
     }
+
+  function generatePassword() {
+    document.password.value = writePassword();
+  }
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
