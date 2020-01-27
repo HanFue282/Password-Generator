@@ -3,10 +3,10 @@ var lowerChar = ("abcdefghijklmnopqrstuvwxyz");
 var upperChar = ("ABCDEFGHIJKLMNOPQRSTUVWYZ");
 var numberChar = ("1234567890");
 var specialChar = ("!@#$%^&*()_+");
-//
+--
 // variables above will be used to generate password.
 // variables below will be used to display and generate a password.
-//
+--
 var generateBtn = document.querySelector("#generate");
 var password = document.getElementById("password");
 var writePassword = generatePassword;

@@ -10,8 +10,8 @@ var specialChar = ("!@#$%^&*()_+");
 var generateBtn = document.querySelector("#generate");
 var password = document.getElementById("password");
 document.getElementById("generate").onclick = function(){writePassword();};
-userInput = "";
 var generatePassword = pwd.value;
+userInput = "";
 
 // Write password to the #password input
   function writePassword(){

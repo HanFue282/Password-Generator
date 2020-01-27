@@ -13,4 +13,3 @@ Generate a random password
                 we will use a confirm if user wants special characters
 
 * Break down the process.
-    
