@@ -1,5 +1,5 @@
 // Assignment Code
-var lowerChar = ("abcdefghijklmnopqrstuvwxyz");
+
 var upperChar = ("ABCDEFGHIJKLMNOPQRSTUVWYZ");
 var numberChar = ("1234567890");
 var specialChar = ("!@#$%^&*()_+");
@@ -10,27 +10,20 @@ var specialChar = ("!@#$%^&*()_+");
 var generateBtn = document.querySelector("#generate");
 var password = document.getElementById("password");
 document.getElementById("generate").onclick = function(){writePassword()};
+userInput() = "";
 
 // Write password to the #password input
-  function writePassword(length){
-    
-    var confirmLength = prompt("How many characters do you want your password?");
+  function writePassword(){
 
-    if (confirmLength < 4) {
-      alert("Password must be between 5-15 characters.")
-      return confirmLength;
-    }
-
-    if (confirmLength) {
-      alert(confirmLength + " characters will be in your password");
-    }
-    else{
-      prompt("Please enter the number of characters for your password.");
+      var confirmCharNum = prompt("How many characters do you want your password?" , placeholder = "5-15");
+      if (confirmCharNum > 4) {
+        alert(confirmCharNum + " characters will be in your password");
+      }
+      else{
+        alert("Please enter between 5-15 characters.");
+        return confirmCharNum;
+      }
       
-    }
-    
-  
-  
       var confirmLowerChar = confirm("Would you like lower case characters in your password?");
       if (confirmLowerChar) {
         alert("Lower case characters are added into password.");
@@ -68,13 +61,14 @@ document.getElementById("generate").onclick = function(){writePassword()};
       if(confirmSpecialChar) {
       alert("Special characters are added into password.");
         //Added!
+        return confirmSpecialChar;
       }
       else {
         alert("Special characers will not be added into password.");
         //Not added.
+        return confirmSpecialChar;
       }
 
-      return (confirmLength + confirmLowerChar + confirmUpperChar + confirmNumberChar +confirmSpecialChar);
     }
 
   function generatePassword() {
