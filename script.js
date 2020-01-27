@@ -1,5 +1,5 @@
 // Assignment Code
-
+var lowerChar = ("abcdefghijklmnopqrstuvwxyz");
 var upperChar = ("ABCDEFGHIJKLMNOPQRSTUVWYZ");
 var numberChar = ("1234567890");
 var specialChar = ("!@#$%^&*()_+");
@@ -9,13 +9,15 @@ var specialChar = ("!@#$%^&*()_+");
 //
 var generateBtn = document.querySelector("#generate");
 var password = document.getElementById("password");
-document.getElementById("generate").onclick = function(){writePassword()};
-userInput() = "";
+document.getElementById("generate").onclick = function(){writePassword();};
+userInput = "";
+var generatePassword = pwd.value;
 
 // Write password to the #password input
   function writePassword(){
 
       var confirmCharNum = prompt("How many characters do you want your password?" , placeholder = "5-15");
+      userInput = ("");
       if (confirmCharNum > 4) {
         alert(confirmCharNum + " characters will be in your password");
       }
@@ -23,7 +25,7 @@ userInput() = "";
         alert("Please enter between 5-15 characters.");
         return confirmCharNum;
       }
-      
+
       var confirmLowerChar = confirm("Would you like lower case characters in your password?");
       if (confirmLowerChar) {
         alert("Lower case characters are added into password.");
@@ -72,7 +74,14 @@ userInput() = "";
     }
 
   function generatePassword() {
-    document.password.value = writePassword();
+
+    charset = (lowerChar.length + upperChar.length + numberChar.length + specialChar.length);
+    pwd = "";
+    for (var i = 0; i < 15; ++i) {
+      pwd += charset.charAt(Math.floor(Math.random() * charset.length));
+
+    }
+    return pwd;
   }
 
 // Add event listener to generate button
