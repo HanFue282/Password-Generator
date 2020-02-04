@@ -1,88 +1,133 @@
 // Assignment Code
-var lowerChar = ("abcdefghijklmnopqrstuvwxyz");
-var upperChar = ("ABCDEFGHIJKLMNOPQRSTUVWYZ");
-var numberChar = ("1234567890");
-var specialChar = ("!@#$%^&*()_+");
+var lowerChar = ['a','b','c','d','e','f','g,','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+var upperChar = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','Y','Z'];
+var numberChar = ['1','2','3','4','5','6','7','8','9','0'];
+var specialChar = ['!','@','#','$','%','^','&','*','(',')','_','+'];
 //
 // variables above will be used to generate password.
 // variables below will be used to display and generate a password.
 //
-var generateBtn = document.querySelector("#generate");
-var password = document.getElementById("password");
-document.getElementById("generate").onclick = function(){writePassword();};
-var generatePassword = pwd.value;
-userInput = "";
 
 // Write password to the #password input
-  function writePassword(){
+      
+    function passwordOptions() {
+      var length = parseInt(
+        prompt("How many characters do you want your password?" , placeholder = "5-15")
+      );
 
-      var confirmCharNum = prompt("How many characters do you want your password?" , placeholder = "5-15");
-      userInput = ("");
-      if (confirmCharNum > 4) {
-        alert(confirmCharNum + " characters will be in your password");
+      if(isNaN(length) === true) {
+        alert("Please enter a number for characters between 5-15");
       }
-      else{
+
+      if (length < 5){
         alert("Please enter between 5-15 characters.");
-        return confirmCharNum;
+        return;
+      }
+      if (length > 15){
+        alert("Maximum password is 15 characters");
+        return;
       }
 
-      var confirmLowerChar = confirm("Would you like lower case characters in your password?");
-      if (confirmLowerChar) {
-        alert("Lower case characters are added into password.");
+      var confirmLowerChar = confirm(
+        "Would you like lower case characters in your password?"
+        );
         //Added!
       }
-      else {
-        alert("Lower case characters will not be added into password");
-        //Not added.
-      }
   
-
       var confirmUpperChar = confirm("Would you like upper case characters in your password?");
       if(confirmUpperChar) {
         alert("Upper case characters are added into password.");
         //Added!
       }
-      else {
-        alert("Upper case characters will not be added into password.");
-        //Not added.
-      }
-      
-  
+
       var confirmNumberChar = confirm("Would you like numbers in your password?");
       if(confirmNumberChar) {
       alert("Numbers will be added into password.");
         //Added!
       }
-      else {
-        alert("Numbers will not be added into password.");
-        //Not added.
-      }
-  
-  
+
       var confirmSpecialChar = confirm("Would you like special charaters in your password?");
       if(confirmSpecialChar) {
       alert("Special characters are added into password.");
         //Added!
         return confirmSpecialChar;
       }
-      else {
-        alert("Special characers will not be added into password.");
-        //Not added.
-        return confirmSpecialChar;
+
+      if(
+        confirmLowerChar === false &&
+        confirmUpperChar === false &&
+        confirmNumberChar === false &&
+        confirmSpecialChar === false
+      ) {
+        alert("Please select character types for password");
       }
 
+      var passwordGenerated = {
+        length:length,
+        confirmLowerChar : confirmLowerChar,
+        confirmUpperChar : confirmUpperChar,
+        confirmNumberChar : confirmNumberChar,
+        confirmSpecialChar : confirmSpecialChar
+      };
+
+      return passwordGenerated;
     }
 
-  function generatePassword() {
+    function generate(arr) {
+      var randomGen = Math.floor(Math.random() * arr.length);
+      var randomPex = arr[randomGen];
 
-    charset = (lowerChar.length + upperChar.length + numberChar.length + specialChar.length);
-    pwd = "";
-    for (var i = 0; i < 15; ++i) {
-      pwd += charset.charAt(Math.floor(Math.random() * charset.length));
-
+      return randomPex;
     }
-    return pwd;
-  }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+    function generatePass() {
+      var confirmOptions = getPasswordConfirm();
+      var result = [];
+
+      var possibleChars = [];
+      var selectedChars = [];
+
+      if(confirmOptions.confirmLowerChar) {
+        possibleChars = possibleChars.concat(lowerChar);
+        selectedChars.push(getRandom(lowerChar));
+      }
+
+      if(confirmOptions.confirmUpperChar) {
+        possibleChars = possibleChars.concat(upperChar);
+        selectedChars.push(getRandom(upperChar));
+      }
+
+      if(confirmOptions.confirmNumberChar) {
+        possibleChars = possibleChars.concat(numberChar);
+        selectedChars.push(getRandom(upperChar));
+      }
+
+      if(confirmOptions.confirmSpecialChar) {
+        possibleChars = possibleChars.concat(selectedChars);
+        selectedChars.push(getRandom(selectedChars));
+      }
+
+      for (var i = 0; i < randomGen.length; i++) {
+        var possibleChar = getRandom(possibleChars);
+
+        result.push(possibleChar);
+      }
+
+      for (var i = 0; i < selectedChars.length; i++) {
+        result[i] = selectedChars[i];
+      }
+
+      return result.join('');
+    }
+
+    var generateBtn = document.querySelector('#generate');
+
+    function writePassword() {
+      var password = generatePass();
+      var passwordText = document.querySelector('#password');
+
+      passwordText.value = password;
+    }
+
+    generateBtn.addEventListener('click', writePassword);
+
